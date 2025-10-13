@@ -1,0 +1,160 @@
+/* Styling Dasar dan Global */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* Latar belakang halaman */
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styling */
+header {
+    background-color: #007bff; /* Biru Primer */
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0 0 10px 0;
+    font-size: 2.5em;
+}
+
+/* Main Content Styling */
+main {
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+section {
+    background-color: white;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+    color: #007bff;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+/* Code Block Styling */
+.code-box {
+    background-color: #282c34;
+    color: #abb2bf;
+    padding: 15px;
+    border-radius: 6px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.9em;
+    overflow-x: auto;
+}
+
+.comment {
+    color: #5c6370;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.attr-name { color: #e5c07b; } /* Kuning */
+.attr-value { color: #98c379; } /* Hijau Muda */
+
+/* Demo Area Styling */
+.card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.badge {
+    background-color: #ffc107;
+    color: #333;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Penerapan CSS pada ID dan CLASS */
+#unique-id {
+    background-color: #ffe0e0; /* Latar belakang merah muda */
+    border: 1px dashed red;
+    padding: 5px;
+}
+.styling-class {
+    font-style: italic;
+    color: #388e3c; /* Hijau tua */
+}
+.keterangan-demo {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-top: 15px;
+}
+
+/* Table Styling */
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+th, td {
+    border: 1px solid #dee2e6;
+    padding: 12px;
+    text-align: left;
+}
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Spesifik Elemen Demo */
+.tombol-aksi {
+    display: inline-block;
+    background-color: #28a745; /* Hijau */
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.tombol-aksi:hover {
+    background-color: #1e7e34;
+}
+
+.img-demo {
+    border: 3px solid #ffc107;
+    border-radius: 50%; /* Membuat gambar bulat */
+    margin: 10px 0;
+    display: block;
+}
+
+.input-demo {
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #343a40; /* Abu-abu gelap */
+    color: #cccccc;
+    padding: 20px 0;
+    text-align: center;
+}
