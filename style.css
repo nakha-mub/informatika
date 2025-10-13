@@ -1,0 +1,246 @@
+/* RESET & BASE STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* 1. HEADER */
+.main-header {
+    background-color: #fff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #3f51b5; /* Warna Brand */
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.main-nav li {
+    margin-left: 20px;
+}
+
+.main-nav a {
+    font-weight: 500;
+    padding-bottom: 5px;
+}
+
+.main-nav a.active {
+    border-bottom: 3px solid #3f51b5;
+}
+
+.search-icon {
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+/* 2. HERO SECTION */
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1200x400?text=Konten+Unggulan');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    padding: 0 40px;
+    margin-bottom: 40px;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: 2.5em;
+    margin: 10px 0;
+}
+
+.hero-content p {
+    margin-bottom: 20px;
+}
+
+.btn-read {
+    display: inline-block;
+    background-color: #ff9800; /* Warna Aksen */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-read:hover {
+    background-color: #e68900;
+}
+
+/* 3. POST GRID (INTI DESAIN) */
+.post-grid {
+    display: grid;
+    /* Membuat layout 3 kolom, responsif */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.post-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Efek Hover untuk Kotak Thumbnail */
+.post-card:hover {
+    transform: translateY(-5px); /* Sedikit terangkat */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.post-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+    flex-grow: 1; /* Memastikan semua konten kartu memiliki tinggi yang sama */
+}
+
+.post-category {
+    display: inline-block;
+    background-color: #3f51b5;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Variasi Warna Kategori (Opsional) */
+.post-category.travel { background-color: #00bcd4; }
+.post-category.food { background-color: #ff5722; }
+.post-category.finance { background-color: #4caf50; }
+
+
+.post-card h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.post-card p {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.post-card small {
+    display: block;
+    color: #aaa;
+    font-size: 0.75em;
+}
+
+/* 4. PAGINATION */
+.pagination {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #3f51b5;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover:not(.current) {
+    background-color: #f0f0f0;
+}
+
+.pagination a.current {
+    background-color: #3f51b5;
+    color: white;
+    border-color: #3f51b5;
+}
+
+/* 5. FOOTER */
+.main-footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 40px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.footer-content a {
+    color: #ff9800;
+    margin: 0 5px;
+}
+
+/* RESPONSIVENESS (Untuk Layar Kecil) */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px 20px;
+    }
+
+    .main-nav ul {
+        margin-top: 10px;
+    }
+
+    .post-grid {
+        /* Di tablet, bisa 2 kolom */
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
+@media (max-width: 500px) {
+    .hero-section {
+        height: 300px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2em;
+    }
+
+    .post-grid {
+        /* Di mobile, menjadi 1 kolom penuh */
+        grid-template-columns: 1fr;
+    }
+}
