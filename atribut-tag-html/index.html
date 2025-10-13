@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Lengkap Atribut Tag HTML</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Memahami Atribut Tag HTML</h1>
+            <p>Informasi Tambahan untuk Mengontrol Perilaku dan Tampilan Elemen.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="pengertian">
+            <h2>Apa Itu Atribut?</h2>
+            <p>Atribut adalah **kata kunci khusus** yang ditambahkan pada **tag pembuka** elemen HTML untuk memberikan informasi tambahan tentang elemen tersebut, mengontrol perilakunya, atau menerapkan gaya.</p>
+            <div class="code-box">
+                <span class="comment">// Sintaks Dasar Atribut</span>
+                <code>&lt;tag <span class="attr-name">nama-atribut</span>=<span class="attr-value">"nilai-atribut"</span>&gt; Konten &lt;/tag&gt;</code>
+            </div>
+        </section>
+
+        <section id="global">
+            <h2>Atribut Global (Dapat Digunakan di Mana Saja)</h2>
+            <p>Atribut ini berlaku untuk hampir semua tag HTML dan sangat krusial untuk styling (CSS) dan interaktivitas (JavaScript).</p>
+
+            <div class="card id-class-demo">
+                <h3><span class="badge">Demo</span> ID dan CLASS</h3>
+                
+                <p id="unique-id">Teks ini menggunakan atribut <code>id="unique-id"</code> (Hanya untuk satu elemen).</p>
+                <p class="styling-class">Teks ini dan teks di bawah menggunakan <code>class="styling-class"</code>.</p>
+                <p class="styling-class">Kelas bisa digunakan berulang kali pada elemen berbeda.</p>
+                
+                <p class="keterangan-demo">
+                    ID digunakan untuk penargetan CSS/JS yang sangat spesifik.<br>
+                    CLASS digunakan untuk mengelompokkan elemen yang berbagi gaya yang sama.
+                </p>
+            </div>
+
+            <ul>
+                <li><strong>`id`</strong>: Pengenal unik untuk satu elemen.</li>
+                <li><strong>`class`</strong>: Mengelompokkan elemen untuk styling yang sama.</li>
+                <li><strong>`style`</strong>: Menentukan Inline CSS (gaya langsung pada elemen).</li>
+                <li><strong>`title`</strong>: Menampilkan tooltip (teks kecil) saat kursor diarahkan ke elemen.</li>
+                <li><strong>`hidden`</strong>: Atribut boolean untuk menyembunyikan elemen.</li>
+            </ul>
+        </section>
+
+        <section id="spesifik">
+            <h2>Atribut Spesifik Elemen (Wajib/Khas)</h2>
+            <p>Atribut ini hanya berfungsi pada tag tertentu untuk fungsionalitas khusus.</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag & Atribut</th>
+                            <th>Fungsi</th>
+                            <th>Contoh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;a href="" target=""&gt;</code></td>
+                            <td>**`href`**: URL tujuan tautan.<br>**`target`**: Menentukan di mana tautan dibuka (misalnya <code>_blank</code> untuk tab baru).</td>
+                            <td><a href="https://google.com" target="_blank" class="tombol-aksi">Buka Google</a></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;img src="" alt=""&gt;</code></td>
+                            <td>**`src`**: Sumber (URL/path) file gambar.<br>**`alt`**: Teks alternatif jika gambar gagal dimuat.</td>
+                            <td><img src="https://via.placeholder.com/100" alt="Placeholder Gambar" class="img-demo"></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;input type="" placeholder=""&gt;</code></td>
+                            <td>**`type`**: Jenis input (text, password, submit, dll).<br>**`placeholder`**: Teks petunjuk di kolom input.</td>
+                            <td><input type="text" placeholder="Masukkan nama" class="input-demo"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Materi dibuat untuk tujuan pembelajaran atribut HTML. &copy; 2024</p>
+        </div>
+    </footer>
+</body>
+</html>
