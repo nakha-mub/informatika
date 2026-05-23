@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input ke Google Sheets</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 20px;
+            padding: 0px 0px;
+            display: flex;
+            justify-content: center;
+        }
+        .form-container {
+            /*background: white;*/
+            padding: 0px;
+            /*border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);*/
+            width: 100%;
+            max-width: 550px;
+        }
+		.petunjuk {
+			background: white;
+            padding: 1px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+			margin-bottom: 20px;
+		}
+        h2 {
+            margin-top: 0;
+            color: #333;
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 20px;
+			background: white;
+			padding: 20px;
+			border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: 600;
+        }
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+			font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        textarea:focus, select:focus, input:focus {
+            border-color: #1b73e8;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1b73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #155cb4;
+        }
+        button:disabled {
+            background-color: #b0d1fc;
+            cursor: not-allowed;
+        }
+        #statusMessage {
+            margin-top: 15px;
+			margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+        }
+        .success { background-color: #27C8F5; color: black; }
+        .error { background-color: red; color: white; }
+		
+		.container {
+			width: 100%; /* Atur lebar div sesuai kebutuhan */
+			margin-bottom: 20px;
+			
+		}
+
+		.gambar-responsif {
+			width: 100%;    /* Lebar akan memenuhi 100% dari lebar div */
+			height: auto;   /* Tinggi menyesuaikan secara otomatis agar gambar tidak gepeng */
+			border-radius: 10px 10px 10px 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+		}
+		#sheetForm {
+			padding: 0px;
+		}
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+	<div class="container">
+		<img src="Header-Form.jpg" alt="Kop Gambar" class="gambar-responsif">
+	</div>
+	
+    <!--<h2>UJIAN AKHIR SEMESTER GENAP<br>INFORMATIKA SMA XI<br><SMALL>TAHUN PELAJARAN 2025/2026</SMALL></h2>-->
+	
+    <form id="sheetForm">
+        
+		<div class="input-group">
+			<big><b>IDENTITAS PESERTA DIDIK</b></big>
+		</div>
+		<div class="input-group">
+			<label for="kelas">Kelas</label>
+			<select name="kelas" id="kelas">
+				<option value="0" selected>- Tidak Ada -</option>
+				<option value="XI 3">Kelas XI 3</option>
+				<option value="XI 5">Kelas XI 5</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<label for="nama">Nama Lengkap</label>
+			<input type="text" id="nama" required placeholder="Masukkan nama Anda">
+		</div>
+		
+		<div class="petunjuk">
+			<h3>Silahkan menjawab soal di bawah ini:</h3>
+			<p><small>Soal berbentuk Pilihan ganda dan Essai. Jawab soal pilihan ganda dengan memilih pilihan jawabannya dan soal essai ketikkan jawabannya pada kotak teks di bawah soal.
+			<br> <b>Selamat Mengerjakan! Jangan lupa berdoa sebelum memulai ujian</b></small>
+			</p>
+		</div>
+		
+
+		<div class="input-group">
+			<label for="soal1">Nomor 1</label>
+			<p>Dalam tahapan SDLC, tim pengembang akan mengumpulkan informasi mendalam dari klien untuk menentukan daftar fitur aplikasi serta batasan sistem yang kemudian dituangkan ke dalam dokumen Software Requirement Specification (SRS). Aktivitas tersebut terjadi pada tahap...
+			</p>
+			<select name="kota" id="soal1">
+				<option value="0" selected>Jawaban</option>
+				<option value="A">A. Planning (Perencanaan)</option>
+				<option value="B">B. Analysis (Analisis Kebutuhan)</option>
+				<option value="C">C. Design (Desain)</option>
+				<option value="D">D. Implementation (Implementasi)</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<label for="soal2">Nomor 2</label>
+			<p>Sebuah perusahaan rintisan (startup) ingin membangun aplikasi yang fiturnya masih dapat berubah sewaktu-waktu mengikuti tren pasar yang dinamis. Berdasarkan karakteristik tersebut, model metodologi SDLC yang paling cocok digunakan adalah...
+			</p>
+			<select name="soal2" id="soal2">
+				<option value="0" selected>Jawaban</option>
+				<option value="A">A. Model Waterfall</option>
+				<option value="B">B. Model Linier</option>
+				<option value="C">C. Model Kaku</option>
+				<option value="D">D. Model Agile</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<label for="soal3">Nomor 3</label>
+			<p>Mengapa pemilihan struktur data yang tepat pada tahap Design dan Implementation sangat krusial bagi efisiensi produk digital yang sedang dibangun? Jelaskan berdasarkan materi yang telah dipelajari!</p>
+			<textarea id="soal3" rows="4" required placeholder="Tulis jawaban Anda di sini..."></textarea>
+		</div>
+		<div class="input-group">
+			<label for="soal4">Nomor 4</label>
+			<p>Ketika menerapkan strategi algoritma untuk memecahkan suatu masalah, seorang programmer memilih untuk memecah masalah besar menjadi sub-masalah yang lebih kecil, lalu menyimpan hasil perhitungannya agar tidak perlu dihitung ulang di kemudian waktu (memoization). Strategi algoritmik yang digunakan ini adalah...
+			</p>
+			<select name="soal4" id="soal4">
+				<option value="0" selected>Jawaban</option>
+				<option value="A">A. Divide and Conquer</option>
+				<option value="B">B. Algoritma Greedy</option>
+				<option value="C">C. Dynamic Programming</option>
+				<option value="D">D. Binary Search</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<label for="soal5">Nomor 5</label>
+			<p>Berdasarkan studi kasus penukaran koin pada materi, kita ingin menukar uang senilai Rp7.000 dengan koin yang tersedia: Rp5.000, Rp4.000, Rp3.000, dan Rp1.000. Jika kita menggunakan strategi alternatif yang optimal, berapakah jumlah koin minimal yang didapatkan dan koin pecahan apa saja yang diambil?
+			</p>
+			<select name="soal5" id="soal5">
+				<option value="0" selected>Jawaban</option>
+				<option value="A">A. 3 koin (Rp5.000 + Rp1.000 + Rp1.000)</option>
+				<option value="B">B. 2 koin (Rp4.000 + Rp3.000)</option>
+				<option value="C">C. 2 koin (Rp5.000 + Rp2.000)</option>
+				<option value="D">D. 4 koin (Rp4.000 + Rp1.000 + Rp1.000 + Rp1.000)</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<label for="soal6">Nomor 6</label>
+			<p>Mengapa Algoritma Greedy sering kali gagal menghasilkan solusi yang benar-benar optimal untuk seluruh masalah, meskipun memiliki kelebihan cepat dan mudah diimplementasikan? Berikan penjelasan berdasarkan prinsip kerjanya!</p>
+			<textarea id="soal6" rows="4" required placeholder="Tulis jawaban Anda di sini..."></textarea>
+		</div>
+		<div class="input-group">
+			<label for="soal7">Nomor 7</label>
+			<p>Sebuah platform media sosial ingin memodelkan fitur pertemanan di mana jika Akun A berteman dengan Akun B, maka Akun B secara otomatis juga berteman dengan Akun A (hubungan timbal balik dua arah). Berdasarkan materi, jenis struktur data Graph yang paling tepat untuk memodelkan jaringan pertemanan tersebut adalah...
+			</p>
+			<select name="soal7" id="soal7">
+				<option value="0" selected>Jawaban</option>
+				<option value="A">A. Subtree Graph</option>
+				<option value="B">B. Directed Graph</option>
+				<option value="C">C. Weighted Graph</option>
+				<option value="D">D. Undirected Graph</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<label for="soal8">Nomor 8</label>
+			<p>Perhatikan gambar di bawah ini! Gambar tersebut merupakan struktur data ...
+			</p>
+			<div style="text-align: center;">
+			<img src="gambar1.jpg" style="max-width: 300px;" alt="grafik" class="gambar-responsif">
+			</div>
+			<select name="soal8" id="soal8">
+				<option value="0" selected>Jawaban</option>
+				<option value="A">A. Binary Tree</option>
+				<option value="B">B. Binary Search Tree</option>
+				<option value="C">C. Graph Berbobot</option>
+				<option value="D">D. AVL Tree</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<label for="soal9">Nomor 9</label>
+			<p>Tulis dan jelaskan Klasifikasi Jaringan Berdasarkan Skala</p>
+			<textarea id="soal9" rows="4" required placeholder="Tulis jawaban Anda di sini..."></textarea>
+		</div>
+		<div class="input-group">
+			<label for="soal10">Nomor 10</label>
+			<p>Ada berapakah Topologi Jaringan Komputer? Tuliskan!<br>Dan Apa jenis topologi yang digunakan di Laboratorium Komputer di SMANKO Sulsel?</p>
+			<textarea id="soal10" rows="4" required placeholder="Tulis jawaban Anda di sini..."></textarea>
+		</div>
+		
+		<div class="input-group" id="statusMessage">dsdaa</div>
+        <button type="submit" id="submitBtn" >Kirim Data</button>
+		
+    </form>
+    
+</div>
+
+<script>
+    // MASUKKAN URL APLIKASI WEB GOOGLE APPS SCRIPT ANDA DI SINI
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxQI31eG4yQhOaCY1HzOXoUmZ-z9qABAfRHBz3sqp4Gbfz6Jx8yUi-46XBzIMOVDLrcTg/exec';
+
+    function dapatkanWaktuSekarang() {
+		const sekarang = new Date();
+		
+		const bulan = sekarang.getMonth() + 1; // getMonth() dimulai dari 0 (Januari = 0)
+		const tanggal = sekarang.getDate();
+		const tahun = sekarang.getFullYear();
+		
+		// Menambahkan angka 0 di depan jika menit/detik/jam di bawah 10
+		const jam = String(sekarang.getHours()).padStart(2, '0');
+		const menit = String(sekarang.getMinutes()).padStart(2, '0');
+		const detik = String(sekarang.getSeconds()).padStart(2, '0');
+		
+		return `${bulan}/${tanggal}/${tahun} ${jam}:${menit}:${detik}`;
+	}
+
+	console.log(dapatkanWaktuSekarang());
+	
+	document.getElementById('sheetForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Mencegah halaman reload otomatis
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const statusMessage = document.getElementById('statusMessage');
+        
+        // Mengubah status tombol saat loading
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Mengirim...';
+        statusMessage.style.display = 'none';
+
+        // Mengambil data dari inputan form
+        const formData = {
+            timestamp: dapatkanWaktuSekarang(),
+			kelas: document.getElementById('kelas').value,
+			nama: document.getElementById('nama').value,
+            soal1: document.getElementById('soal1').value,
+            soal2: document.getElementById('soal2').value,
+            soal3: document.getElementById('soal3').value,
+			soal4: document.getElementById('soal4').value,
+            soal5: document.getElementById('soal5').value,
+			soal6: document.getElementById('soal6').value,
+            soal7: document.getElementById('soal7').value,
+			soal8: document.getElementById('soal8').value,
+            soal9: document.getElementById('soal9').value,
+			soal10: document.getElementById('soal10').value
+        };
+
+        // Mengirimkan data menggunakan Fetch API JavaScript
+        fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors', // Penting untuk menghindari isu kebijakan CORS cross-domain
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(() => {
+            // Menampilkan pesan sukses ke pengguna
+            statusMessage.style.display = 'block';
+            statusMessage.className = 'success';
+            statusMessage.innerText = 'Selamat! Ujian anda telah selesai. Jawaban anda sudah terkirim.';
+            sheetForm.style.display = 'hide';
+            // Reset form inputan
+            document.getElementById('sheetForm').reset();
+        })
+        .catch(error => {
+            // Menampilkan pesan error jika gagal koneksi
+            statusMessage.style.display = 'block';
+            statusMessage.className = 'error';
+            statusMessage.innerText = 'Terjadi kesalahan: ' + error.message;
+        })
+        .finally(() => {
+            // Mengembalikan tombol ke keadaan semula
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'Kirim Data';
+        });
+    });
+</script>
+
+</body>
+</html>
