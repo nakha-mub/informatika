@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[PERIKSA JAWABAN] INFORMATIKA XI - SAS GENAP T.P. 2025/2026</title>
+	<link rel="icon" type="image/png" href="logoNKMM.png">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #3b82f6;
+            --success: #10b981;
+            --bg: #f8fafc;
+            --text: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 30px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            /*max-width: 1000px;*/
+            width: 98%;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h2 { text-align: center; color: var(--primary); margin-top: 0; }
+
+        /* Styling Tabel */
+        .table-container { 
+			overflow-x: auto;
+			margin-top: 20px;
+			height: 600px; /* Sesuaikan tinggi tabel Anda */
+			overflow-y: auto; /* Memunculkan scrollbar vertikal */
+		}
+		
+		/* Kunci agar thead tetap diam */
+		.table-container thead th {
+		  position: sticky;
+		  top: 0;
+		  z-index: 10; /* Agar posisinya selalu berada di atas teks lainnya */
+		}
+		
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { background: var(--primary); color: white; padding: 12px; font-size: 0.9rem; text-transform: uppercase; }
+        td { padding: 12px; border-bottom: 1px solid #e2e8f0; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        
+        .btn-edit {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-edit:hover { background-color: #2563eb; }
+
+        /* Styling Modal (Pop-up Form) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center; align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white; padding: 30px; border-radius: 10px;
+            width: 100%; max-width: 900px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+			height: 400px; /* Wajib ada batasan tinggi */
+			overflow-y: scroll;
+        }
+        .modal h3 { margin-top: 0; color: var(--primary); }
+        
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .input-group input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
+        
+        .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-save { background: var(--success); color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .btn-cancel { background: #64748b; color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
+        .loading { text-align: center; font-weight: bold; color: #64748b; padding: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>[PERIKSA JAWABAN] INFORMATIKA XI - SAS GENAP T.P. 2025/2026</h2>
+    <div id="loading" class="loading">Sedang memuat data...</div>
+    
+    <div class="table-container">
+        <table id="dataTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>No</th>
+					<th>Timestamp</th>
+					<th>Kelas</th>
+                    <th>Nama</th>
+                    <th>Jawaban Soal1</th>
+					<th>Jawaban Soal2</th>
+					<th>Jawaban Soal3</th>
+					<th>Jawaban Soal4</th>
+					<th>Jawaban Soal5</th>
+					<th>Jawaban Soal6</th>
+					<th>Jawaban Soal7</th>
+					<th>Jawaban Soal8</th>
+					<th>Jawaban Soal9</th>
+					<th>Jawaban Soal10</th>
+					<th>Skor Sementara</th>
+					<th>Skor Final</th>
+					<th>AKSI</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <h3>Edit Data Pendaftar</h3>
+        <form id="editForm">
+            <input type="hidden" id="editRowIndex">
+			<input type="hidden" id="editNo">
+			<input type="hidden" id="editTM">
+            
+            <div class="input-group">
+                <label for="editNama">Nama Siswa</label>
+                <span id="editNama"></span>
+            </div>
+			<div class="input-group">
+                <label for="editKelas">Kelas</label>
+                <span id="editKelas" ></span>
+            </div>
+			<div class="input-group">
+                <label for="editSoal1">Jawaban Nomor 1</label>
+                <span id="editSoal1" ></span>
+            </div>
+			<div class="input-group">
+                <label for="editSoal2">Jawaban Nomor 2</label>
+                <span id="editSoal2" ></span>
+            </div>
+			<div class="input-group">
+                <label for="editSoal3">Jawaban Nomor 3</label>
+                <p id="editSoal3" ></p>
+            </div>
+			<div class="input-group">
+                <label for="editSoal4">Jawaban Nomor 4</label>
+                <span id="editSoal4" ></span>
+            </div>
+			<div class="input-group">
+                <label for="editSoal5">Jawaban Nomor 5</label>
+                <span id="editSoal5" ></span>
+            </div>
+			<div class="input-group">
+                <label for="editSoal6">Jawaban Nomor 6</label>
+                <p id="editSoal6" ></p>
+            </div>
+			<div class="input-group">
+                <label for="editSoal7">Jawaban Nomor 7</label>
+                <span id="editSoal7" ></span>
+            </div>
+			<div class="input-group">
+                <label for="editSoal8">Jawaban Nomor 8</label>
+                <span id="editSoal8" ></span>
+            </div>
+			<div class="input-group">
+                <label for="editSoal9">Jawaban Nomor 9</label>
+                <p id="editSoal9" ></p>
+            </div>
+			<div class="input-group">
+                <label for="editSoal10">Jawaban Nomor 10</label>
+                <p id="editSoal10" ></p>
+            </div>
+			<div class="input-group">
+                <label for="editSkorSementara">Jawaban Nomor 10</label>
+                <p id="editSkorSementara" ></p>
+            </div>
+            <div class="input-group">
+                <label for="editSkorFinal">Jawaban Skor Final</label>
+                <input type="number" id="editSkorFinal" required>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="tutupModal()">Batal</button>
+                <button type="submit" id="btnSimpan" class="btn-save">Simpan Perubahan</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Taruh URL Aplikasi Web Google Apps Script Anda di sini
+    const webAppUrl = 'https://script.google.com/macros/s/AKfycbwT18EEsKsFKV5ZQ-m8IdrTdN5Nyjei2-dA7qTCaiNgnw7k0wK81PG8ORK9lJrp6MQL4g/exec';
+    let localData = [];
+
+    // 1. FUNGSI MEMBACA & MENAMPILKAN DATA
+    async function loadData() {
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('dataTable').style.display = 'none';
+        
+        try {
+            const response = await fetch(webAppUrl);
+            localData = await response.json();
+            
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            localData.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.no || '-'}</td>
+					<td>${item.timestamp || '-'}</td>
+					<td>${item.kelas || '-'}</td>
+                    <td>${item.nama || '-'}</td>
+                    <td>${item.soal1 || '-'}</td>
+					<td>${item.soal2 || '-'}</td>
+					<td>${item.soal3 || '-'}</td>
+					<td>${item.soal4 || '-'}</td>
+					<td>${item.soal5 || '-'}</td>
+					<td>${item.soal6 || '-'}</td>
+					<td>${item.soal7 || '-'}</td>
+					<td>${item.soal8 || '-'}</td>
+					<td>${item.soal9 || '-'}</td>
+					<td>${item.soal10 || '-'}</td>
+					<td>${item.skor_sementara || '-'}</td>
+					<td>${item.skor_final|| '-'}</td>
+                    <td><button class="btn-edit" onclick="bukaModal(${index})">Edit</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dataTable').style.display = 'table';
+        } catch (error) {
+            document.getElementById('loading').innerText = 'Gagal mengambil data.';
+            console.error(error);
+        }
+    }
+
+    // 2. FUNGSI MEMBUKA MODAL DAN COPI DATA KE FORM
+    function bukaModal(index) {
+        const item = localData[index];
+		document.getElementById('editRowIndex').value = item.rowindex;
+		document.getElementById('editNo').innerText = item.no;
+		document.getElementById('editTM').innerText = item.timestamp;
+        document.getElementById('editNama').innerText = item.nama;
+		document.getElementById('editKelas').innerText = item.kelas || '';
+        document.getElementById('editSoal1').innerText = item.soal1 || '';
+		document.getElementById('editSoal2').innerText = item.soal2 || '';
+		document.getElementById('editSoal3').innerText = item.soal3 || '';
+		document.getElementById('editSoal4').innerText = item.soal4 || '';
+		document.getElementById('editSoal5').innerText = item.soal5 || '';
+		document.getElementById('editSoal6').innerText = item.soal6 || '';
+		document.getElementById('editSoal7').innerText = item.soal7 || '';
+		document.getElementById('editSoal8').innerText = item.soal8 || '';
+		document.getElementById('editSoal9').innerText = item.soal9 || '';
+		document.getElementById('editSoal10').innerText = item.soal10 || '';
+		document.getElementById('editSkorSementara').innerText = item.skor_sementara || '';
+        document.getElementById('editSkorFinal').value = item.skor_sementara || '';
+        //document.getElementById('editJurusan').value = item.jurusan || '';
+        
+        document.getElementById('editModal').style.display = 'flex';
+    }
+
+    function tutupModal() {
+        document.getElementById('editModal').style.display = 'none';
+    }
+
+    // 3. FUNGSI MENGIRIM DATA PERUBAHAN (UPDATE) KE GOOGLE SHEETS
+    document.getElementById('editForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btnSimpan = document.getElementById('btnSimpan');
+        btnSimpan.innerText = 'Menyimpan...';
+        btnSimpan.disabled = true;
+
+        const updatedData = {
+            rowindex: document.getElementById('editRowIndex').value,
+            no: document.getElementById('editNo').value,
+			timestamp: document.getElementById('editTM').value,
+			nama: document.getElementById('editNama').innerText,
+			kelas: document.getElementById('editKelas').innerText,
+			soal1: document.getElementById('editSoal1').innerText,
+			soal2: document.getElementById('editSoal2').innerText,
+			soal3: document.getElementById('editSoal3').innerText,
+			soal4: document.getElementById('editSoal4').innerText,
+			soal5: document.getElementById('editSoal5').innerText,
+			soal6: document.getElementById('editSoal6').innerText,
+			soal7: document.getElementById('editSoal7').innerText,
+			soal8: document.getElementById('editSoal8').innerText,
+			soal9: document.getElementById('editSoal9').innerText,
+			soal10: document.getElementById('editSoal10').innerText,
+			//skor_sementara: document.getElementById('editSkorSementara').innerText,
+			skor_final: document.getElementById('editSkorFinal').value
+			
+            
+        };
+
+        try {
+            // Mengirim data menggunakan POST ke Google Apps Script
+            await fetch(webAppUrl, {
+                method: 'POST',
+                mode: 'no-cors', // Penting untuk menghindari CORS issue pada Web App script
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedData)
+            });
+
+            alert('Data berhasil diperbarui!');
+            tutupModal();
+            loadData(); // Memuat ulang tabel untuk melihat hasil update terbaru
+        } catch (error) {
+            alert('Terjadi kesalahan saat menyimpan data.');
+            console.error(error);
+        } finally {
+            btnSimpan.innerText = 'Simpan Perubahan';
+            btnSimpan.disabled = false;
+        }
+    });
+
+    // Jalankan pengambilan data pertama kali saat web dibuka
+    window.onload = loadData;
+</script>
+
+</body>
+</html>
