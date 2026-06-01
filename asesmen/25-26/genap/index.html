@@ -80,7 +80,7 @@
             background-color: #b0d1fc;
             cursor: not-allowed;
         }
-        #statusMessage {
+        #statusMessage, #tokenMessage {
             margin-top: 15px;
 			margin-bottom: 20px;
             padding: 10px;
@@ -116,9 +116,19 @@
 		<img src="Header-Form.jpg" alt="Kop Gambar" class="gambar-responsif">
 	</div>
 	
+	<div id="tokenContainer" class="input-group">
+		<h3 style="margin-top: 0; text-align: center; color: #1b73e8;">KODE AKSES UJIAN</h3>
+		<p style="text-align: center; font-size: 0.9rem; color: #666;">Silahkan masukkan 5 digit kode khusus ujian yang diberikan oleh Guru Informatika.</p>
+		<div style="margin-bottom: 15px;">
+			<input type="text" id="inputToken" maxlength="5" placeholder="Masukkan 5 digit kode..." style="text-align: center; font-size: 1.2rem; font-weight: bold; letter-spacing: 5px; text-transform: uppercase;">
+		</div>
+		<div id="tokenMessage" class="error">Kode yang Anda masukkan salah!</div>
+		<button type="button" onclick="verifikasiToken()">Masuk Halaman Ujian</button>
+	</div>
+	
     <!--<h2>UJIAN AKHIR SEMESTER GENAP<br>INFORMATIKA SMA XI<br><SMALL>TAHUN PELAJARAN 2025/2026</SMALL></h2>-->
 	
-    <form id="sheetForm">
+    <form id="sheetForm" style="display: none;">
         
 		<div class="input-group">
 			<big><b>IDENTITAS PESERTA DIDIK</b></big>
@@ -248,6 +258,31 @@
 </div>
 
 <script>
+	// PENGATURAN TOKEN AKSES UJIAN
+	const KODE_BENAR = "A93K2"; // <--- SILAHKAN GANTI 5 DIGIT KODE UTAMA DI SINI
+
+	function verifikasiToken() {
+		const inputToken = document.getElementById('inputToken').value.toUpperCase().trim();
+		const tokenMessage = document.getElementById('tokenMessage');
+		const tokenContainer = document.getElementById('tokenContainer');
+		const sheetForm = document.getElementById('sheetForm');
+
+		if (inputToken === KODE_BENAR) {
+			tokenContainer.style.display = 'none'; // Sembunyikan form token
+			sheetForm.style.display = 'block';    // Tampilkan lembar ujian
+		} else {
+			tokenMessage.style.display = 'block';   // Tampilkan pesan error
+			document.getElementById('inputToken').value = '';
+		}
+	}
+
+	// Fitur Tekan Enter pada Input Token langsung trigger verifikasi
+	document.getElementById('inputToken').addEventListener('keypress', function(e) {
+		if (e.key === 'Enter') {
+			verifikasiToken();
+		}
+	});
+	
 	//Langsung Reload Begitu Pengguna Kembali ke Tab (Paling Sering Digunakan)
 	document.addEventListener("visibilitychange", function() {
 		if (document.visibilityState === "visible") {
