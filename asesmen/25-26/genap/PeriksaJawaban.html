@@ -51,10 +51,19 @@
 		  z-index: 10; /* Agar posisinya selalu berada di atas teks lainnya */
 		}
 		
-        table { width: 100%; border-collapse: collapse; text-align: left; }
+        table { width: 100%; border-collapse: collapse; text-align: left; table-layout: fixed; }
         th { background: var(--primary); color: white; padding: 12px; font-size: 0.9rem; text-transform: uppercase; }
         td { padding: 12px; border-bottom: 1px solid #e2e8f0; }
         tr:nth-child(even) { background-color: #f8fafc; }
+		/* Tentukan tinggi baris yang diinginkan */
+		td, th {
+		  height: 50px; /* Atur tinggi sesuai kebutuhan Anda, misalnya 50px */
+		  box-sizing: border-box; /* Memastikan padding tidak menambah tinggi baris */
+		  overflow: hidden; /* Menyembunyikan teks jika terlalu panjang */
+		  text-overflow: ellipsis; /* Menambahkan titik-titik (...) jika teks terpotong */
+		  white-space: nowrap; /* Mencegah teks turun ke baris baru */
+		  
+		}
         
         .btn-edit {
             background-color: var(--secondary);
@@ -77,11 +86,14 @@
             z-index: 1000;
         }
         .modal-content {
-            background: white; padding: 30px; border-radius: 10px;
+            background: white; padding: 0px; border-radius: 10px;
             width: 100%; max-width: 900px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 			height: 400px; /* Wajib ada batasan tinggi */
 			overflow-y: scroll;
         }
+		#editForm {
+			padding: 30px;
+		}
         .modal h3 { margin-top: 0; color: var(--primary); }
         
         .input-group { margin-bottom: 15px; }
@@ -93,6 +105,26 @@
         .btn-cancel { background: #64748b; color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
         .loading { text-align: center; font-weight: bold; color: #64748b; padding: 20px; }
+		
+		.container-flex {
+		  display: flex; /* Membuat elemen anak berjajar ke samping */
+		  gap: 10px; /* Memberi jarak antar div */
+		}
+
+		.kotak {
+		  padding: 20px 30px 5px;
+		  width: 50%;
+		}
+		
+		.container-flex {
+			background: var(--primary); 
+			position: sticky;
+			top: 0;
+			z-index: 10; /* Agar posisinya selalu berada di atas teks lainnya */
+		}
+		.container-flex h3 {
+			color: white;
+		}
     </style>
 </head>
 <body>
@@ -109,16 +141,16 @@
 					<th>Timestamp</th>
 					<th>Kelas</th>
                     <th>Nama</th>
-                    <th>Jawaban Soal1</th>
-					<th>Jawaban Soal2</th>
-					<th>Jawaban Soal3</th>
-					<th>Jawaban Soal4</th>
-					<th>Jawaban Soal5</th>
-					<th>Jawaban Soal6</th>
-					<th>Jawaban Soal7</th>
-					<th>Jawaban Soal8</th>
-					<th>Jawaban Soal9</th>
-					<th>Jawaban Soal10</th>
+                    <th>No. 1</th>
+					<th>No. 2</th>
+					<th>No. 3</th>
+					<th>No. 4</th>
+					<th>No. 5</th>
+					<th>No. 6</th>
+					<th>No. 7</th>
+					<th>No. 8</th>
+					<th>No. 9</th>
+					<th>No. 10</th>
 					<th>Skor Sementara</th>
 					<th>Skor Final</th>
 					<th>AKSI</th>
@@ -131,7 +163,10 @@
 
 <div id="editModal" class="modal">
     <div class="modal-content">
-        <h3>Edit Data Pendaftar</h3>
+		<div class="container-flex">
+		  <div class="kotak"><h3>Edit Data Pendaftar</h3></div>
+		  <div class="kotak" style="text-align: right;"><button type="button" class="btn-edit" style="background-color: red; color: white;" onclick="tutupModal()">X</button></div>
+		</div>
         <form id="editForm">
             <input type="hidden" id="editRowIndex">
 			<input type="hidden" id="editNo">
