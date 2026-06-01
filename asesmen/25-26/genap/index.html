@@ -248,10 +248,20 @@
 </div>
 
 <script>
+	//Langsung Reload Begitu Pengguna Kembali ke Tab (Paling Sering Digunakan)
+	document.addEventListener("visibilitychange", function() {
+		if (document.visibilityState === "visible") {
+			// Halaman kembali dilihat oleh pengguna, lakukan reload
+			alert("Ujian akan diulang karena anda keluar dari halaman ini !!!");
+			window.location.reload();
+		}
+	});
+
     // MASUKKAN URL APLIKASI WEB GOOGLE APPS SCRIPT ANDA DI SINI
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxQI31eG4yQhOaCY1HzOXoUmZ-z9qABAfRHBz3sqp4Gbfz6Jx8yUi-46XBzIMOVDLrcTg/exec';
 
-    function dapatkanWaktuSekarang() {
+	
+	function dapatkanWaktuSekarang() {
 		const sekarang = new Date();
 		
 		const bulan = sekarang.getMonth() + 1; // getMonth() dimulai dari 0 (Januari = 0)
@@ -266,7 +276,7 @@
 		return `${bulan}/${tanggal}/${tahun} ${jam}:${menit}:${detik}`;
 	}
 
-	console.log(dapatkanWaktuSekarang());
+	//console.log(dapatkanWaktuSekarang());
 	
 	document.getElementById('sheetForm').addEventListener('submit', function(e) {
         e.preventDefault(); // Mencegah halaman reload otomatis
