@@ -304,7 +304,11 @@
 		document.getElementById('editSoal9').innerText = item.soal9 || '';
 		document.getElementById('editSoal10').innerText = item.soal10 || '';
 		document.getElementById('editSkorSementara').innerText = item.skor_sementara || '';
-        document.getElementById('editSkorFinal').value = item.skor_sementara || '';
+		if (item.skor_final != ""){
+			document.getElementById('editSkorFinal').value = item.skor_final || '';
+		} else {
+			document.getElementById('editSkorFinal').value = item.skor_sementara || '';
+		}
         //document.getElementById('editJurusan').value = item.jurusan || '';
         
         document.getElementById('editModal').style.display = 'flex';
